@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<?php
+
+    $host = "localhost";
+    $user = "root";
+    $pass = "";
+    $db = "test_db";
+  
+try {
+   
+    $conn = mysqli_connect($host, $user, $pass, $db);
+     //echo "Connected successfully"; 
+    }
+catch(exception $e)
+    {
+    echo "Connection failed: " . $e->getMessage();
+    }
+    return $conn;
+
+$sql = "SELECT * FROM users";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        echo "<br> email: ". $row["email"]. " - fullname: ". $row["fullname"]. " - Username" . $row["username"] . " - password" . $row["password"] "<br>";
+    }
+} else {
+    echo "0 results";
+}
+
+$conn->close();
+?>
+
+</body>
+</html>
